@@ -1,31 +1,9 @@
 'use server';
 import Header from "@/components/home/Header";
 import Link from "next/link";
-import { agent } from "@/api/agent.api";
-import { redirect } from "next/navigation";
+import { handleSubmit } from '@/actions/register';
 
 export default async function Register(){
-
-    const handleSubmit = async (formData: FormData) => {
-        'use server';
-        if(formData.get('terms') !== 'on') return;
-        if(formData.get('password') !== formData.get('password_confirmation')) return;
-        const userToSend = {
-            firstName: formData.get('first_name'),
-            lastName: formData.get('last_name'),
-            email: formData.get('email'),
-            password: formData.get('password'),
-            roleId: parseInt(formData.get('role')?.toString() || '2')
-        };
-        
-        let res = await agent.post('Users', userToSend)
-        .then(response => {
-            return response.data;
-        }).catch(error => {
-            console.log(error.response.data);
-        });
-        if(res) redirect('/login');
-    };
 
     return(
         <>

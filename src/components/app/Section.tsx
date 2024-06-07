@@ -15,13 +15,13 @@ export default async function SubjectsSection({title, subjects}: Props){
             <h3 className="text-4xl">{title}</h3>
             <div className="grid grid-cols-4 gap-5 py-2 px-4 text-gray-500">
                 {subjects && subjects.map((subject, index) => (
-                    <div key={index} className="w-full h-80 bg-indigo-50 flex flex-col items-center rounded-2xl overflow-hidden gap-2">
+                    <div key={index} className="w-52 h-72 bg-indigo-50 flex flex-col items-center rounded-2xl overflow-hidden gap-2">
                         <Image src={notfound} alt="notfound" width={500} height={200} className="w-full h-[60%]"/>
-                        <h4 className="text-xl">{subject.name}</h4>
+                        <h4 className="text-lg">{subject.name}</h4>
                         <p><span>Profesor: </span><span className="italic">{subject.teacherName}</span></p>
-                        {subject.materials.length > 0 ? (
+                        {subject.contents.length > 0 ? (
                             <Link href={`/app/subject/${subject.id}`} className="hover:text-indigo-400 border-b-[1px] border-indigo-400" >
-                               {subject.materials.length} Materiales
+                               {subject.contents.length} Materiales
                             </Link>
                         ):(
                             <p>Sin materiales</p>

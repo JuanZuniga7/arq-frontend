@@ -1,31 +1,9 @@
 'use server';
-
-import { agent } from "@/api/agent.api";
 import Header from "@/components/home/Header";
-import { login } from "@/utils/lib";
-import { redirect } from "next/navigation";
+import { handleSubmit } from "@/actions/login";
 import Link from "next/link";
 
 export default async function Login() {
-
-    const handleSubmit = async (formData: FormData) => {
-        'use server';
-        const userToSend = {
-            email: formData.get('email'),
-            password: formData.get('password')
-        };
-        
-        const response = await agent.post('/Users/Login', userToSend)
-        .then(response => {
-            return response.data;
-        }).catch(error => {
-            console.log(error);
-        });
-        if(response){
-            await login(response);
-            redirect('/app');
-        }
-    };
 
     return(
         <>

@@ -4,6 +4,6 @@ export default interface ISubject {
     description: string
     teacherId: number
     teacherName: string
-    materials: any[]
+    contents: any[]
 }
   

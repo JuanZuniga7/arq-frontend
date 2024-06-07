@@ -1,21 +1,23 @@
 'use server';
-import { agent } from "@/api/agent.api";
+import { login } from '@/utils/lib';
+import { PrismaClient } from '@prisma/client';
+import { redirect } from 'next/navigation';
+
+const prisma = new PrismaClient();
 
 export const handleSubmit = async (formData: FormData):Promise<boolean> => {
     const userToSend = {
         email: formData.get('email'),
         password: formData.get('password')
     };
-    
-    const response = await agent.post('/Users/Login', userToSend)
-    .then(response => {
-        return response.data;
-    }).catch(error => {
-        console.log(error);
-    });
-    if(response){
-        localStorage.setItem('user', JSON.stringify(response));
-        return true;
-    }
-    return false;
+    if(!userToSend.email || !userToSend.password) return false;
+    let user = await prisma.user.findFirstOrThrow({
+        where:{
+            email: userToSend.email.toString(),
+            password: userToSend.password.toString()
+        }
+    })
+    if(!user) return false;
+    login({name: user.name, email: user.email, roleId: user.roleId});
+    redirect('/app');
 };

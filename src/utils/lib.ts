@@ -7,9 +7,9 @@ const secretKey = "secret";
 const key = new TextEncoder().encode(secretKey);
 
 interface IUserSession{
-    firstName: string;
-    lastName: string;
-    token: string;
+    name: string;
+    email: string;
+    roleId: number;
 }
 
 export async function encrypt(payload: any) {
@@ -39,7 +39,7 @@ export async function logout() {
 
 export async function getSession() {
   const session = cookies().get("session")?.value;
-  if (!session) return redirect("/login");
+  if (!session) return;
   return await decrypt(session);
 }
 

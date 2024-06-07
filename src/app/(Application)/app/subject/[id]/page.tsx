@@ -2,19 +2,16 @@
 import Image from "next/image";
 import Header from "@/components/home/Header";
 import notfound from '@/assets/image/notfound.jpg';
-import ISubject from "@/utils/types/Subjects.type";
 import { getSession } from "@/utils/lib";
-import { agent } from "@/api/agent.api";
 import { redirect } from "next/navigation";
-import { GetServerSideProps } from "next";
+import ISubject from "@/utils/types/Subjects.type";
+import { getSubject } from "@/actions/idsubject";
 
 export default async function App({params}:any){
     const session = await getSession();
     if(!session) return redirect('/login');
-    const subject:ISubject = await agent(`/Subjects/${params.id}`)
-    .then(res =>{ return res.data }).catch(err => console.error(err));
-    if(!subject) return redirect('/app');
 
+    const subject:ISubject = await getSubject(parseInt(params.id));
     return(
         <>
             <Header/>
@@ -31,7 +28,7 @@ export default async function App({params}:any){
                 <section className="w-full h-full border-2 col-span-3 rounded-r-2xl p-5 flex flex-col gap-5">
                     <h5 className="text-xl font-semibold">Materiales disponibles</h5>
                     <ul className="grid grid-cols-3 gap-4">
-                        {subject.materials.map((material, index) => (
+                        {subject && subject.contents.map((material, index) => (
                             <li key={index} className="w-fit text-base flex items-center px-5 py-0.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 cursor-pointer">
                                 {material.name}.
                                 {material.documentType}
