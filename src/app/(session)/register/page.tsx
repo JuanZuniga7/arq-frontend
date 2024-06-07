@@ -2,6 +2,7 @@
 import Header from "@/components/home/Header";
 import Link from "next/link";
 import { agent } from "@/api/agent.api";
+import { redirect } from "next/navigation";
 
 export default async function Register(){
 
@@ -16,13 +17,14 @@ export default async function Register(){
             password: formData.get('password'),
             roleId: parseInt(formData.get('role')?.toString() || '2')
         };
-        console.log(JSON.stringify(userToSend));
-        agent.post('Users', userToSend)
+        
+        let res = await agent.post('Users', userToSend)
         .then(response => {
-            console.log(response.data);
+            return response.data;
         }).catch(error => {
             console.log(error.response.data);
         });
+        if(res) redirect('/login');
     };
 
     return(
