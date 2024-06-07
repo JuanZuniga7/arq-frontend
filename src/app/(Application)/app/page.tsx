@@ -11,8 +11,8 @@ export default async function App(){
     return(
         <>
             <Header/>
-            <main className="w-[70%] h-full flex flex-col">
-                <Section title="Materias" subjects={subjects}/>
+            <main className="w-[60%] h-full flex flex-col mt-10">
+                <Section title="Mis materias" subjects={subjects}/>
             </main>
         </>
     )
