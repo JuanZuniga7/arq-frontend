@@ -1,6 +1,6 @@
 'use server';
 import Image from "next/image";
-import Header from "@/components/home/Header";
+import Header from "@/components/app/Header";
 import notfound from '@/assets/image/notfound.jpg';
 import { getSession } from "@/utils/lib";
 import { redirect } from "next/navigation";
@@ -12,7 +12,7 @@ export default async function App({params}:any){
     if(!session) return redirect('/login');
 
     const subject:ISubject = await getSubject(parseInt(params.id));
-    return(
+return(
         <>
             <Header/>
             <main className="w-[80%] h-full grid grid-cols-4 gap-5 py-2">
