@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Background from "@/components/common/Background";
-import Inicio from "@/components/home/Inicio";
-import Footer from "@/components/home/footer";
-import Header from "@/components/app/Header";
 
 
 export const metadata: Metadata = {
@@ -18,10 +14,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="w-screen h-full font-serif overflow-x-hidden overflow-y-auto flex flex-col items-center">
-        <Header/>
-        <Inicio/>
-        <Footer/>
+      <body className="w-screen min-h-screen h-full font-serif overflow-x-hidden overflow-y-auto flex flex-col items-center">
+        {children}
       </body>
     </html>
   );

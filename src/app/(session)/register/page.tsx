@@ -8,7 +8,7 @@ export default async function Register(){
     return(
         <>
             <Header/>
-            <main className="flex items-center justify-center w-full h-full">
+            <main className="flex items-center justify-center w-full h-[90vh]">
                 <form action={handleSubmit} className="w-[30%] h-fit rounded-2xl flex flex-col items-center gap-10">
                     <h2 className="text-indigo-600 font-bold text-5xl">
                         Registrate
